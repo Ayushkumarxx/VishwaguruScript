@@ -164,11 +164,13 @@ const CodeGrid = () => {
         {items.map((item, index) => (
           <div
             key={index}
-            className=" shadow-md  flex flex-col justify-between border-t border-white py-8 "
+            className="   flex flex-col justify-between border-t border-white py-8 "
           >
             <div>
               <h2 className="text-xl font-semibold mb-2">{item.title}</h2>
-              <p className="text-gray-400 text-[16px] mb-4">{item.description}</p>
+              <p className="text-gray-400 text-[16px] mb-4">
+                {item.description}
+              </p>
             </div>
 
             <CodeEditor
@@ -178,10 +180,22 @@ const CodeGrid = () => {
               wordWrap={false}
               showCopyButton={true}
               height="300px"
-              
             />
           </div>
         ))}
+
+        <div className=" flex flex-col justify-between border-t border-white py-8 ">
+          <div>
+            <h2 className="text-xl font-semibold mb-2">More Coming soon..</h2>
+            <p className="text-gray-400 text-[16px] mb-4">
+              Working on more funtions for you! it's a Toy language built on
+              Javascript.{" "}
+            </p>
+            <p className="text-gray-400 text-[16px] mb-4">
+              Not for serious use. Very basic logic used in this language.{" "}
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );

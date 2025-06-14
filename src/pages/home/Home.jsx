@@ -168,6 +168,12 @@ bihari_sramik`);
         </p>
         <CodeGrid />
       </div>
+
+      <footer className="w-full text-center mb-8">
+        <p className="text-[16px] mt-4 font-normal leading-6">
+          Made with ❤️ by Ayush Kumar
+        </p>
+      </footer>
     </>
   );
 };
