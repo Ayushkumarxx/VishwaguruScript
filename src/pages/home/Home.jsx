@@ -100,6 +100,11 @@ bihari_sramik`);
           </p>
         </div>
 
+        <div
+  className="absolute w-1/2 h-1/2 -right-[45%] -bottom-[20%] z-0 [background:linear-gradient(180deg,_#bca5ff00,_#f65f12)] [filter:blur(123px)] "
+></div>
+
+
         {/* Right Side */}
         <div className="w-full md:w-3/5 h-auto p-2 flex items-center">
           <CodeEditor
@@ -113,7 +118,7 @@ bihari_sramik`);
       </div>
 
       {/* Playground */}
-      <div className="max-w-[1300px] mx-auto px-4 py-12 " ref={playgroundRef}>
+      <div className="max-w-[1300px] mx-auto px-4 py-12 relative z-10" ref={playgroundRef}>
         <div className="w-full flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
           <div className="text-3xl md:text-4xl font-semibold">Playground</div>
           <div className="flex flex-wrap gap-3">
