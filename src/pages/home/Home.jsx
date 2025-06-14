@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { FaHeart } from "react-icons/fa";
 import { GiTigerHead } from "react-icons/gi";
 import CodeEditor from "../../shared/components/Editor";
@@ -20,7 +20,14 @@ arambha systummm
 
 bihari_sramik `);
 
-  const [code2, setCode2] = useState("");
+  const [code2, setCode2] = useState(`arambha systummm
+    
+// Your code starts here
+
+
+
+
+bihari_sramik`);
   const [output, setOutput] = useState("");
   const [showOutput, setShowOutput] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -44,6 +51,12 @@ bihari_sramik `);
 
   const onChange = (value) => setCode2(value);
 
+  const playgroundRef = useRef(null);
+
+  const scrollToPlayground = () => {
+    playgroundRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <>
       {/* Hero Section */}
@@ -54,7 +67,9 @@ bihari_sramik `);
             <div className="px-3 py-1 bg-[#FF5722] rounded-full flex items-center text-sm md:text-base font-bold text-white">
               <GiTigerHead className="mr-1" /> भारत
             </div>
-            <p className="text-sm md:text-base font-medium text-[#FF5722]">Make in India</p>
+            <p className="text-sm md:text-base font-medium text-[#FF5722]">
+              Make in India
+            </p>
             <FaHeart className="text-[#FF5722] text-base md:text-lg" />
           </div>
 
@@ -71,10 +86,12 @@ bihari_sramik `);
             bugs and spiritual syntax.
           </p>
 
-          <button className="w-full md:w-[85%] mt-8 py-2.5 font-semibold rounded-xl backdrop-blur-lg bg-[#FF5722]/10 border border-[#FF5722]/40 text-white hover:bg-[#FF5722]/20 transition">
+          <button
+            onClick={scrollToPlayground}
+            className="w-full md:w-[85%] mt-8 py-2.5 font-semibold rounded-xl backdrop-blur-lg bg-[#FF5722]/10 border border-[#FF5722]/40 text-white hover:bg-[#FF5722]/20 transition"
+          >
             Playground
           </button>
-
           <p className="text-sm text-center mt-4 md:w-[85%] font-normal leading-6">
             Vishwaguru Script <b>v1.0.2</b> No updates. It was born perfect.
             <br />
@@ -96,7 +113,7 @@ bihari_sramik `);
       </div>
 
       {/* Playground */}
-      <div className="max-w-[1300px] mx-auto px-4 py-12">
+      <div className="max-w-[1300px] mx-auto px-4 py-12 " ref={playgroundRef}>
         <div className="w-full flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
           <div className="text-3xl md:text-4xl font-semibold">Playground</div>
           <div className="flex flex-wrap gap-3">
