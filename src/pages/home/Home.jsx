@@ -63,7 +63,7 @@ bihari_sramik`);
       <div className="max-w-[1300px] mx-auto min-h-screen px-4 py-8 flex flex-col md:flex-row items-center gap-10">
         {/* Left Side */}
         <div className="w-full md:w-2/5">
-          <div className="flex flex-wrap items-center gap-2 bg-[#191e1f] border-[2px] border-[#ff5622bb] rounded-full pl-3 pr-4 py-1 w-fit">
+          <div className="flex flex-wrap items-center gap-2 bg-[#191e1f] border-[2px] border-[#ff5622bb] rounded-full pl-1 pr-4 py-1 w-fit">
             <div className="px-3 py-1 bg-[#FF5722] rounded-full flex items-center text-sm md:text-base font-bold text-white">
               <GiTigerHead className="mr-1" /> भारत
             </div>
