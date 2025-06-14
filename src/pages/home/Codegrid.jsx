@@ -173,7 +173,7 @@ const CodeGrid = () => {
 
             <CodeEditor
               value={item.code}
-              fileName="documentation"
+              fileName="docs"
               readOnly={true}
               wordWrap={false}
               showCopyButton={true}

@@ -21,7 +21,7 @@ arambha systummm
 bihari_sramik `);
 
   const [code2, setCode2] = useState(`arambha systummm
-    
+
 // Your code starts here
 
 
@@ -104,7 +104,7 @@ bihari_sramik`);
         <div className="w-full md:w-3/5 h-auto p-2 flex items-center">
           <CodeEditor
             value={code1}
-            fileName="documentation"
+            fileName="docs"
             readOnly={true}
             wordWrap={false}
             showCopyButton={false}

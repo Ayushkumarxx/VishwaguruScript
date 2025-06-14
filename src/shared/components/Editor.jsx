@@ -302,7 +302,7 @@ const CodeEditor = ({
           {/* {readOnly && (
             <span className="text-xs text-gray-400 bg-gray-700 px-2 py-1 rounded">Read Only</span>
           )} */}
-          <span className="text-xs text-gray-400">Vishwaguru Script</span>
+         {!showCopyButton && <span className="text-xs text-gray-400">Vishwaguru Script</span>}
         </div>
       </div>
 
@@ -325,9 +325,9 @@ const CodeEditor = ({
         {/* Editor Container */}
         <div className="flex-1 relative overflow-hidden">
           {/* Syntax Highlighting Layer */}
-          <div
+         {readOnly  && <div
             ref={highlightRef}
-            className="absolute inset-0 p-4 font-mono text-sm overflow-auto pointer-events-none"
+            className="absolute inset-0 p-4 font-mono text-sm overflow-auto "
             style={{ 
               fontFamily: 'ui-monospace, SFMono-Regular, "SF Mono", Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
               lineHeight: '1.5rem',
@@ -337,9 +337,10 @@ const CodeEditor = ({
           >
             {getHighlightedCode()}
           </div>
+}
 
           {/* Textarea Layer */}
-          <textarea
+        { !readOnly && <textarea
             ref={textareaRef}
             value={code}
             onChange={handleCodeChange}
@@ -347,7 +348,7 @@ const CodeEditor = ({
             onScroll={handleScroll}
             placeholder={placeholder}
             readOnly={readOnly}
-            className={`absolute inset-0 w-full h-full p-4 bg-transparent text-transparent caret-white font-mono text-sm   resize-none outline-none border-none overflow-auto  ${
+            className={`absolute inset-0 w-full h-full p-4  text-[#88C0D0] caret-white font-mono text-sm   resize-none outline-none border-none overflow-auto  ${
               readOnly ? 'cursor-default' : ''
             }`}
             style={{ 
@@ -363,7 +364,7 @@ const CodeEditor = ({
             data-gramm="false"
             data-gramm_editor="false"
             data-enable-grammarly="false"
-          />
+          />}
         </div>
       </div>
 
