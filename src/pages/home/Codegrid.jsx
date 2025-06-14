@@ -198,7 +198,7 @@ const CodeGrid = () => {
           <div>
             <h2 className="text-xl font-semibold mb-2">More Coming soon..</h2>
             <p className="text-gray-400 text-[16px] mb-4">
-              Working on more funtions for you! it's a Toy language built on
+              Working on more funtions for you Guys! it's a Toy language built on
               Javascript.{" "}
             </p>
             <p className="text-gray-400 text-[16px] mb-4">

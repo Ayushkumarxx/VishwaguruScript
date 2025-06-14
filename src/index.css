@@ -17,11 +17,12 @@
   --color-theme-orange: #D0C5A9;
 
 }
-
+html{
+    overflow-x: hidden;
+}
 body {
   background: #0d121c;
   color: #ffffff;
-  overflow-x: hidden;
 }
 /* width */
 ::-webkit-scrollbar {
