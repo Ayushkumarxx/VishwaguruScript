@@ -40,7 +40,7 @@ bihari_sramik`);
       const result = runViswaguru(code2);
       setOutput(result);
       setLoading(false);
-    }, 1500);
+    }, 300);
   };
 
   const handleClear = () => {
