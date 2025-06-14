@@ -1,22 +1,6 @@
-// viswaguruEngine.js
 import { parse } from "./ast.js";
 import { Declaration } from "./helper.js";
 import { tokenize } from "./lexer.js";
-
-const __capturedLogs = [];
-
-function __captureOutput(fn) {
-  try {
-    const result = fn();
-    if (Array.isArray(result)) {
-      __capturedLogs.push(result.map(String).join(" "));
-    } else if (result !== undefined) {
-      __capturedLogs.push(String(result));
-    }
-  } catch (error) {
-    __capturedLogs.push(`Error: ${error.message}`);
-  }
-}
 
 function parseExpression(tokens) {
   let expression = "";
@@ -66,7 +50,7 @@ function indent(code) {
     .join("\n");
 }
 
-function astToJs(ast) {
+function astToJs(ast, captureFnName = "__captureOutput") {
   let code = "";
 
   for (const statement of ast.body) {
@@ -86,12 +70,12 @@ function astToJs(ast) {
         break;
 
       case Declaration.OutputDeclaration:
-        code += `__captureOutput(() => [${value}]);\n`;
+        code += `${captureFnName}(() => [${value}]);\n`;
         break;
 
       case Declaration.WhileDeclaration: {
         const condition = parseExpression(statement.condition);
-        const bodyCode = astToJs({ body: statement.body });
+        const bodyCode = astToJs({ body: statement.body }, captureFnName);
         code += `while (${condition}) {\n${indent(bodyCode)}\n}\n`;
         break;
       }
@@ -100,13 +84,17 @@ function astToJs(ast) {
         const init = parseExpression(statement.init);
         const condition = parseExpression(statement.condition);
         const increment = parseExpression(statement.increment);
-        const bodyCode = astToJs({ body: statement.body });
+        const bodyCode = astToJs({ body: statement.body }, captureFnName);
         code += `for (${init}; ${condition}; ${increment}) {\n${indent(bodyCode)}\n}\n`;
         break;
       }
+
       case Declaration.BreakDeclaration:
+        code += "break;\n";
+        break;
+
       case Declaration.ContinueDeclaration:
-        code += statement.type === "BreakDeclaration" ? "break;\n" : "continue;\n";
+        code += "continue;\n";
         break;
 
       case Declaration.IfDeclaration: {
@@ -114,11 +102,11 @@ function astToJs(ast) {
         branches.forEach((branch, index) => {
           const keyword = index === 0 ? "if" : "else if";
           const condition = parseExpression(branch.condition);
-          const branchBody = astToJs({ body: branch.body });
+          const branchBody = astToJs({ body: branch.body }, captureFnName);
           code += `${keyword} (${condition}) {\n${indent(branchBody)}\n}\n`;
         });
         if (elseBody) {
-          const elseCode = astToJs({ body: elseBody });
+          const elseCode = astToJs({ body: elseBody }, captureFnName);
           code += `else {\n${indent(elseCode)}\n}\n`;
         }
         break;
@@ -129,9 +117,9 @@ function astToJs(ast) {
   return code;
 }
 
-// Compile to JS
+// Compile to JavaScript code
 function compileToJs(code) {
-  __capturedLogs.length = 0;
+  const __capturedLogs = [];
 
   const tokens = tokenize(code);
   if (!tokens.success) {
@@ -145,29 +133,43 @@ function compileToJs(code) {
     return { success: false, logs: __capturedLogs };
   }
 
-
   const jsCode = astToJs(parseResult.ast);
   return { success: true, jsCode, logs: __capturedLogs };
 }
 
-// Execute compiled JS
+// Execute JS and capture output
 function executeCompiledJs(jsCode) {
+  const __capturedLogs = [];
+
+  function __captureOutput(fn) {
+    try {
+      const result = fn();
+      if (Array.isArray(result)) {
+        __capturedLogs.push(result.map(String).join(" "));
+      } else if (result !== undefined) {
+        __capturedLogs.push(String(result));
+      }
+    } catch (error) {
+      __capturedLogs.push(`Error: ${error.message}`);
+    }
+  }
+
   try {
-    eval(jsCode);
+    const exec = new Function("__captureOutput", jsCode);
+    exec(__captureOutput);
   } catch (e) {
-    __capturedLogs.push("Execution Error: " + e);
+    __capturedLogs.push("Execution Error: " + e.message);
   }
 
   return __capturedLogs.join("\n");
 }
 
-// Full run function
+// Full Runner
 function runViswaguru(code) {
   const result = compileToJs(code);
   if (!result.success) return result.logs.join("\n");
 
-  const output = executeCompiledJs(result.jsCode);
-  return output;
+  return executeCompiledJs(result.jsCode);
 }
 
 export { compileToJs, executeCompiledJs, runViswaguru };
