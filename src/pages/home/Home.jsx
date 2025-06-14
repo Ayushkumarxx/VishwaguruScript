@@ -176,8 +176,8 @@ bihari_sramik`);
 
       <footer className="w-full text-center mb-8">
         <p className="text-[16px] mt-4 font-normal leading-6">
-          Made with ❤️ by Ayush Kumar
-        </p>
+          Made with ❤️ by  <a href="https://www.linkedin.com/in/ayush-kumar-b5531b277/">Ayush Kumar</a>
+         </p>
       </footer>
     </>
   );
