@@ -93,7 +93,7 @@ bihari_sramik`);
             Playground
           </button>
           <p className="text-sm text-center mt-4 md:w-[85%] font-normal leading-6">
-            Vishwaguru Script <b>v1.0.2</b> No updates. It was born perfect.
+             <b>Version 1.0.2</b> No updates. It was born perfect.
             <br />
             (or so it claims). <br />
             Have questions? Meditate. Answers will come in a vision.

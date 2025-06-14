@@ -11,8 +11,8 @@ bihari_sramik`;
 // 2. Variables
 const code2 = `arambha systummm
 
-ghoshit_kar umra = 20;
-nishchit_kar naam = "Ayush";
+ghoshit_kar umra = 20;               // let
+nishchit_kar naam = "Ayush";    // const
 
 bihari_sramik`;
 
@@ -41,12 +41,18 @@ bihari_sramik`;
 const code5 = `arambha systummm
 
 ghoshit_kar sankhya = 10;          // number
+ghoshit_kar floatSankhya = 10.5;   // float
 ghoshit_kar naam = "Bihari Dev";   // string
-ghoshit_kar satyaHai = satya;      // boolean
+ghoshit_kar satyaHai = satya;      // true
+ghoshit_kar asatyaHai = asatya;    // false
 ghoshit_kar kuchNahi = chintan;    // null equivalent
 
-prakashit_kar(naam);
 prakashit_kar(sankhya);
+prakashit_kar(floatSankhya);
+prakashit_kar(naam);
+prakashit_kar(satyaHai);
+prakashit_kar(asatyaHai);
+prakashit_kar(kuchNahi);
 
 bihari_sramik`;
 
@@ -100,7 +106,11 @@ ghoshit_kar a = 10;
 ghoshit_kar b = 20;
 
 ghoshit_kar sum = a + b;
-ghoshit_kar isEqual = (a == b);
+ghoshit_kar isEqual = (a == b); // (a != b)
+ghoshit_kar isGreater = (a > b); // (a < b)
+ghoshit_kar and = (a ca b); // and operator
+ghoshit_kar or = (a va b); // or operator
+ghoshit_kar not = na a;
 ghoshit_kar isTrue = (satya ca asatya);
 
 prakashit_kar(sum);
