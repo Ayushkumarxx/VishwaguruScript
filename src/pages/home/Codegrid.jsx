@@ -153,16 +153,17 @@ const CodeGrid = () => {
       description: "Use yadi, anyatha_yadi, and anyatha for conditions.",
       code: code6,
     },
-    {
-      title: "For Loop",
-      description: "Use prati_ghatak for iterating.",
-      code: code7,
-    },
-    {
-      title: "While Loop + Control",
-      description: "yatha for loops, viram to break, agla_ghaatak to continue.",
-      code: code8,
-    },
+   {
+  title: "For Loop",
+  description: "Use prati_ghatak for loop. Max 10k iterations.",
+  code: code7,
+},
+{
+  title: "While Loop + Controls",
+  description: "Use yatha (while), viram (break), agla_ghaatak (continue). Max 10k loops.",
+  code: code8,
+},
+
     {
       title: "Operators",
       description: "Mathematical and logical operations.",

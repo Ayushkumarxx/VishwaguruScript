@@ -19,20 +19,22 @@ function parseExpression(tokens) {
         expression += value;
         break;
       case "OPERATOR":
-        expression += {
-          na: "!",
-          va: "||",
-          ca: "&&",
-          chintan: "null",
-          satya: "true",
-          asatya: "false",
-        }[value] || value;
+        expression +=
+          {
+            na: "!",
+            va: "||",
+            ca: "&&",
+            chintan: "null",
+            satya: "true",
+            asatya: "false",
+          }[value] || value;
         break;
       case "KEYWORD":
-        expression += {
-          ghoshit_kar: " let ",
-          nishchit_kar: " const ",
-        }[value] || ` ${value} `;
+        expression +=
+          {
+            ghoshit_kar: " let ",
+            nishchit_kar: " const ",
+          }[value] || ` ${value} `;
         break;
       case "SYMBOL":
         expression += value;
@@ -76,7 +78,10 @@ function astToJs(ast, captureFnName = "__captureOutput") {
       case Declaration.WhileDeclaration: {
         const condition = parseExpression(statement.condition);
         const bodyCode = astToJs({ body: statement.body }, captureFnName);
-        code += `while (${condition}) {\n${indent(bodyCode)}\n}\n`;
+        const loopId = `__loopCounter${Math.random().toString(36).slice(2, 7)}`;
+        code += `{\n  let ${loopId} = 0;\n  while (${condition}) {\n    if (++${loopId} > 10000) throw new Error("Infinite loop or max number of iterations reached");\n${indent(
+          bodyCode
+        )}\n  }\n}\n`;
         break;
       }
 
@@ -85,7 +90,10 @@ function astToJs(ast, captureFnName = "__captureOutput") {
         const condition = parseExpression(statement.condition);
         const increment = parseExpression(statement.increment);
         const bodyCode = astToJs({ body: statement.body }, captureFnName);
-        code += `for (${init}; ${condition}; ${increment}) {\n${indent(bodyCode)}\n}\n`;
+        const loopId = `__loopCounter${Math.random().toString(36).slice(2, 7)}`;
+        code += `{\n  let ${loopId} = 0;\n  for (${init}; ${condition}; ${increment}) {\n    if (++${loopId} > 10000) throw new Error("Infinite loop or max number of iterations reached");\n${indent(
+          bodyCode
+        )}\n  }\n}\n`;
         break;
       }
 
