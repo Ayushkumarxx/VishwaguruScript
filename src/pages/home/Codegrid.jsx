@@ -61,8 +61,10 @@ const code6 = `arambha systummm
 
 ghoshit_kar aayu = 18;
 
-yadi (aayu >= 18) {
+yadi (aayu > 18) {
   prakashit_kar("Aap vote de sakte hain");
+} anyatha_yadi (aayu == 18) {
+  prakashit_kar("Aap vote de sakte hain finally!");
 } anyatha {
   prakashit_kar("Maaf kijiye, aap abhi chhote hain");
 }
