@@ -153,16 +153,17 @@ const CodeGrid = () => {
       description: "Use yadi, anyatha_yadi, and anyatha for conditions.",
       code: code6,
     },
-   {
-  title: "For Loop",
-  description: "Use prati_ghatak for loop. Max 10k iterations.",
-  code: code7,
-},
-{
-  title: "While Loop + Controls",
-  description: "Use yatha (while), viram (break), agla_ghaatak (continue). Max 10k loops.",
-  code: code8,
-},
+    {
+      title: "For Loop",
+      description: "Use prati_ghatak for loop. Max 10k iterations.",
+      code: code7,
+    },
+    {
+      title: "While Loop + Controls",
+      description:
+        "Use yatha (while), viram (break), agla_ghaatak (continue). Max 10k loops.",
+      code: code8,
+    },
 
     {
       title: "Operators",
@@ -201,8 +202,8 @@ const CodeGrid = () => {
           <div>
             <h2 className="text-xl font-semibold mb-2">More Coming soon..</h2>
             <p className="text-gray-400 text-[16px] mb-4">
-              Working on more funtions for you Guys! it's a Toy language built on
-              Javascript.{" "}
+              Working on more funtions for you Guys! it's a Toy language built
+              on Javascript.{" "}
             </p>
             <p className="text-gray-400 text-[16px] mb-4">
               Not for serious use. Very basic logic used in this language.{" "}

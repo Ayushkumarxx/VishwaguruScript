@@ -11,7 +11,7 @@ function tokenize(input) {
 
   const createError = (type, message, position, context) => ({
     success: false,
-    error: { type, message, position, context }
+    error: { type, message, position, context },
   });
 
   while (current < input.length) {
@@ -40,7 +40,17 @@ function tokenize(input) {
         }
         current++;
       }
-      continue;
+      // If we reached the end without closing the comment
+      if (current >= input.length - 1) {
+        return createError(
+          "UNTERMINATED_COMMENT",
+          "Unterminated multi-line comment",
+          current - 1,
+          "Comment started with '/*' but never closed with '*/'"
+        );
+      }
+
+      continue; // Skip comment and move on
     }
 
     // String Literals (supporting escape sequences)
@@ -59,7 +69,7 @@ function tokenize(input) {
             r: "\r",
             "\\": "\\",
             '"': '"',
-            "'": "'"
+            "'": "'",
           };
           value += escapeMap[escapeChar] ?? escapeChar;
         } else {
@@ -83,10 +93,7 @@ function tokenize(input) {
     }
 
     // Number literals (int and float support)
-    if (
-      isDigit(char) ||
-      (char === "." && isDigit(input[current + 1]))
-    ) {
+    if (isDigit(char) || (char === "." && isDigit(input[current + 1]))) {
       let value = "";
       let hasDecimal = false;
       let start = current;
@@ -140,7 +147,10 @@ function tokenize(input) {
       }
 
       const parsedValue = hasDecimal ? parseFloat(value) : parseInt(value);
-      tokens.push({ type: hasDecimal ? "FLOAT" : "NUMBER", value: parsedValue });
+      tokens.push({
+        type: hasDecimal ? "FLOAT" : "NUMBER",
+        value: parsedValue,
+      });
       continue;
     }
 

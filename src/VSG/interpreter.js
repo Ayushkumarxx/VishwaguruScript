@@ -130,6 +130,8 @@ function compileToJs(code) {
   const __capturedLogs = [];
 
   const tokens = tokenize(code);
+
+  console.dir(tokens.tokens, { depth: null, maxArrayLength: null });
   if (!tokens.success) {
     __capturedLogs.push("Tokenization Error: " + tokens.error.message);
     return { success: false, logs: __capturedLogs };
