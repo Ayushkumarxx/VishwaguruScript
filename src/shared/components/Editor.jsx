@@ -47,11 +47,11 @@ const Tokens = {
 const CodeEditor = ({
   value = "",
   onChange = () => {},
-  height = "410px",
+  height = "415px",
   width = "100%",
   borderRadius = "8px",
   fileName = "script.bihari",
-  placeholder = "// Write your Bihari code here...",
+  placeholder = "// Write your Vishwaguru code here...",
   showLineNumbers = true,
   className = "",
   showCopyButton = true,

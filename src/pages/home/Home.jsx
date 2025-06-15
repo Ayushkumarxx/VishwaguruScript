@@ -93,17 +93,14 @@ bihari_sramik`);
             Playground
           </button>
           <p className="text-sm text-center mt-4 md:w-[85%] font-normal leading-6">
-             <b>Version 1.0.2</b> No updates. It was born perfect.
+            <b>Version 1.0.4</b> No updates. It was born perfect.
             <br />
             (or so it claims). <br />
             Have questions? Meditate. Answers will come in a vision.
           </p>
         </div>
 
-        <div
-  className="absolute w-1/2 h-1/2 -right-[45%] -bottom-[20%] z-0 [background:linear-gradient(180deg,_#bca5ff00,_#f65f12)] [filter:blur(123px)] "
-></div>
-
+        <div className="absolute w-1/2 h-1/2 -right-[45%] -bottom-[20%] z-0 [background:linear-gradient(180deg,_#bca5ff00,_#f65f12)] [filter:blur(123px)] "></div>
 
         {/* Right Side */}
         <div className="w-full md:w-3/5 h-auto p-2 flex items-center">
@@ -118,7 +115,10 @@ bihari_sramik`);
       </div>
 
       {/* Playground */}
-      <div className="max-w-[1300px] mx-auto px-4 py-12 relative z-10" ref={playgroundRef}>
+      <div
+        className="max-w-[1300px] mx-auto px-4 py-12 relative z-10"
+        ref={playgroundRef}
+      >
         <div className="w-full flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
           <div className="text-3xl md:text-4xl font-semibold">Playground</div>
           <div className="flex flex-wrap gap-3">
@@ -176,8 +176,11 @@ bihari_sramik`);
 
       <footer className="w-full text-center mb-8">
         <p className="text-[16px] mt-4 font-normal leading-6">
-          Made with ❤️ by  <a href="https://www.linkedin.com/in/ayush-kumar-b5531b277/">Ayush Kumar</a>
-         </p>
+          Made with ❤️ by{" "}
+          <a href="https://www.linkedin.com/in/ayush-kumar-b5531b277/">
+            Ayush Kumar
+          </a>
+        </p>
       </footer>
     </>
   );

@@ -13,7 +13,7 @@ function parse(tokens) {
   // Helper function to create error objects
   const createError = (type, message, context) => ({
     success: false,
-    error: { type, message, context }
+    error: { type, message, context },
   });
 
   const expected = (expectedType, expectedValue = null, passedToken = null) => {
@@ -21,13 +21,18 @@ function parse(tokens) {
     if (!token) {
       return createError(
         "UNEXPECTED_END_OF_INPUT",
-        `Expected ${expectedType}${expectedValue ? ` '${expectedValue}'` : ""} but reached end of input`,
-        `Parser was expecting ${expectedType}${expectedValue ? ` '${expectedValue}'` : ""}`
+        `Expected ${expectedType}${
+          expectedValue ? ` '${expectedValue}'` : ""
+        } but reached end of input`,
+        `Parser was expecting ${expectedType}${
+          expectedValue ? ` '${expectedValue}'` : ""
+        }`
       );
     }
 
     const typeMatches = token.type === expectedType;
-    const valueMatches = expectedValue === null || token.value === expectedValue;
+    const valueMatches =
+      expectedValue === null || token.value === expectedValue;
 
     if (typeMatches && valueMatches) {
       if (!passedToken) consume();
@@ -36,8 +41,12 @@ function parse(tokens) {
 
     return createError(
       "UNEXPECTED_TOKEN",
-      `Expected ${expectedType}${expectedValue ? ` '${expectedValue}'` : ""}, but got ${token.type} '${token.value}'`,
-      `Expected ${expectedType}${expectedValue ? ` '${expectedValue}'` : ""} but found '${token.value}' instead`
+      `Expected ${expectedType}${
+        expectedValue ? ` '${expectedValue}'` : ""
+      }, but got ${token.type} '${token.value}'`,
+      `Expected ${expectedType}${
+        expectedValue ? ` '${expectedValue}'` : ""
+      } but found '${token.value}' instead`
     );
   };
 
@@ -126,7 +135,10 @@ function parse(tokens) {
     }
 
     const node = {
-      type: varOrconst.value === "ghoshit_kar" ? Declaration.VarDeclaration : Declaration.ConstDeclaration,
+      type:
+        varOrconst.value === "ghoshit_kar"
+          ? Declaration.VarDeclaration
+          : Declaration.ConstDeclaration,
       name,
     };
 
@@ -160,14 +172,14 @@ function parse(tokens) {
       node: {
         type: Declaration.OutputDeclaration,
         value: contentResult.tokens,
-      }
+      },
     };
   };
 
   // Helper function to parse statements (used in blocks and main program)
   const parseStatement = () => {
     const token = peek();
-    
+
     if (token.type === "KEYWORD") {
       switch (token.value) {
         case "ghoshit_kar":
@@ -184,6 +196,22 @@ function parse(tokens) {
         case "viram":
         case "agla_ghaatak":
           return parseBreakOrContinue();
+        case "arambha":
+        case "systummm":
+        case "bihari_sramik":
+          return createError(
+            "MULTIPLE_DECLARATIONS",
+            `Multiple declarations of '${token.value}' are not allowed`,
+            "Only one declaration of each type is allowed in a program"
+          );
+        case "anyatha_yadi":
+        case "anyatha":
+          return createError(
+            "WRONG_SYNTAX",
+            `Invalid syntax for '${token.value}'`,
+            "Cannot use 'anyatha_yadi' or 'anyatha' without a 'yadi' block"
+          );
+       
         default:
           consume(); // Skip unknown keywords
           return null;
@@ -214,7 +242,7 @@ function parse(tokens) {
         type: Declaration.AssignmentDeclaration,
         name: identifier,
         value: exprResult.tokens,
-      }
+      },
     };
   };
 
@@ -249,7 +277,7 @@ function parse(tokens) {
 
   const parseWhileLoop = () => {
     consume(); // consume 'yatha'
-    
+
     const parenCheck = expected("SYMBOL", "(");
     if (!parenCheck.success) return parenCheck;
 
@@ -257,7 +285,8 @@ function parse(tokens) {
     if (!conditionResult.success) {
       conditionResult.error.type = "ConditionError";
       conditionResult.error.message = "Expression is not valid";
-      conditionResult.error.context = "Ensure all opening parentheses and expressions are properly written";
+      conditionResult.error.context =
+        "Ensure all opening parentheses and expressions are properly written";
       return conditionResult;
     }
 
@@ -278,13 +307,13 @@ function parse(tokens) {
         type: Declaration.WhileDeclaration,
         condition: conditionResult.tokens,
         body: bodyResult.node,
-      }
+      },
     };
   };
 
   const parseForLoop = () => {
     consume(); // consume 'prati_ghatak'
-    
+
     const parenCheck = expected("SYMBOL", "(");
     if (!parenCheck.success) return parenCheck;
 
@@ -292,13 +321,14 @@ function parse(tokens) {
     if (!contentResult.success) {
       contentResult.error.type = "ConditionError";
       contentResult.error.message = "Expression is not valid";
-      contentResult.error.context = "Ensure all opening parentheses and expressions are properly written";
+      contentResult.error.context =
+        "Ensure all opening parentheses and expressions are properly written";
       return contentResult;
     }
 
     const loopTokens = contentResult.tokens;
     const semicolonIndices = [];
-    
+
     loopTokens.forEach((token, index) => {
       if (token.type === "SYMBOL" && token.value === ";") {
         semicolonIndices.push(index);
@@ -321,21 +351,26 @@ function parse(tokens) {
       node: {
         type: Declaration.ForDeclaration,
         init: loopTokens.slice(0, semicolonIndices[0]),
-        condition: loopTokens.slice(semicolonIndices[0] + 1, semicolonIndices[1]),
+        condition: loopTokens.slice(
+          semicolonIndices[0] + 1,
+          semicolonIndices[1]
+        ),
         increment: loopTokens.slice(semicolonIndices[1] + 1),
         body: bodyResult.node,
-      }
+      },
     };
   };
 
   const parseBreakOrContinue = () => {
     const keyword = consume().value;
     const node = {
-      type: keyword === "viram" ? Declaration.BreakDeclaration : Declaration.ContinueDeclaration,
-      
+      type:
+        keyword === "viram"
+          ? Declaration.BreakDeclaration
+          : Declaration.ContinueDeclaration,
     };
     return { success: true, node };
-  }
+  };
   const parseIfStatement = () => {
     consume(); // consume 'yadi'
 
@@ -353,7 +388,8 @@ function parse(tokens) {
     if (!conditionResult.success) {
       conditionResult.error.type = "ConditionError";
       conditionResult.error.message = "Invalid 'if' condition expression";
-      conditionResult.error.context = "Unmatched parentheses or malformed condition";
+      conditionResult.error.context =
+        "Unmatched parentheses or malformed condition";
       return conditionResult;
     }
 
@@ -376,7 +412,8 @@ function parse(tokens) {
       if (!elseifConditionResult.success) {
         elseifConditionResult.error.type = "ConditionError";
         elseifConditionResult.error.message = "Invalid 'else-if' condition";
-        elseifConditionResult.error.context = "Unmatched parentheses or malformed expression";
+        elseifConditionResult.error.context =
+          "Unmatched parentheses or malformed expression";
         return elseifConditionResult;
       }
 
@@ -409,7 +446,8 @@ function parse(tokens) {
 
   const systummmCheck = expected("KEYWORD", "systummm");
   if (!systummmCheck.success) {
-    systummmCheck.error.context = "Program must have 'systummm' keyword after 'arambha'";
+    systummmCheck.error.context =
+      "Program must have 'systummm' keyword after 'arambha'";
     return systummmCheck;
   }
 
