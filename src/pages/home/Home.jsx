@@ -9,8 +9,8 @@ const Home = () => {
   const [code1] = useState(`// Vishwaguru Language Example
 arambha systummm
 
-   nischit_kar naam = "Ayush";  // const
-   ghosit_kar sankhya = 42;  // let
+   nishchit_kar naam = "Ayush";  // const
+   ghoshit_kar sankhya = 42;  // let
     
    yadi (naam == "Ayush") {
      prakashit_kar("Hello Ayush!"); // conditional print
