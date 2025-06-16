@@ -157,7 +157,7 @@ function tokenize(input) {
     // Operators (symbolic and word-based)
     const matchedOperator = Tokens.operators.find((op) => {
       if (input.startsWith(op, current)) {
-        if (["ca", "va", "na"].includes(op)) {
+        if (["ca", "va", "na", "chintan", "satya", "asatya"].includes(op)) {
           const nextChar = input[current + op.length];
           return !nextChar || !/[a-zA-Z0-9_]/.test(nextChar);
         }
